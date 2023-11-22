@@ -4,6 +4,8 @@ services:
     build:
       context: .
     environment:
+    env_file:
+      - ".env"
     volumes:
       - .:/app
     ports:
