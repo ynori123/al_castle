@@ -5,6 +5,7 @@ erDiagram
 castles ||--|{ restaurants : ""
 users ||--o{ fell_castles : ""
 fell_castles ||--|| castles : ""
+castles }|--|| castle_distances : ""
 
 users{
     bigint id PK
@@ -31,6 +32,13 @@ restaurants {
     varchar name
     varchar summary
     varchar url 
+}
+castle_distances {
+    bigint id PK
+    bigint castle_id1 FK
+    bigint castle_id2 FK
+    double distance 
+    datetime time "GoogleMap APIから取得したもの"
 }
 ```
 ## Endpoints
