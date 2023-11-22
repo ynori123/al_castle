@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from src.database import Base
+>>>>>>> ee0d436 (DB Model)
 from sqlalchemy import (
     Column, 
     Integer, 
