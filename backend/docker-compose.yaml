@@ -3,7 +3,6 @@ services:
   app:
     build:
       context: .
-    environment:
     env_file:
       - ".env"
     volumes:
