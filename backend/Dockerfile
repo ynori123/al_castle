@@ -11,4 +11,4 @@ RUN apt-get install -y --no-install-recommends default-libmysqlclient-dev
 COPY ./src /app/src
 ENV PYTHONPATH=/app/src
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
