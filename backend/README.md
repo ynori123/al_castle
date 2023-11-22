@@ -42,12 +42,8 @@ castle_distances {
     bigint id PK
     bigint castle_id1 FK
     bigint castle_id2 FK
-<<<<<<< HEAD
     double direct_distance "直線距離"
     double way_distance "道のりの距離"
-=======
-    double distance 
->>>>>>> 30c2cb4 (add er diagram)
     datetime time "GoogleMap APIから取得したもの"
 }
 ```
