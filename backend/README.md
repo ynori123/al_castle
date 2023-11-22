@@ -27,6 +27,7 @@ castles {
 }
 restaurants { 
     bigint id PK
+    bigint castle_id FK 
     varchar name
     varchar summary
     varchar url 
