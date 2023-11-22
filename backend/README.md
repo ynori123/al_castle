@@ -44,9 +44,27 @@ castle_distances {
 ## Endpoints
 |Request Method|Route|Summary|
 |---|---|---|
+|GET|/ping|通信確認|
 |GET|/castles|城の情報|
 |GET|/castles/{castle_id}|城の詳細情報|
 |POST|/travel|最短経路検索|
 |POST|/user/signin|ログイン|
 |POST|/user/signup|アカウント登録|
 |GET|/log/{user_id}|今まで落とした城|
+
+
+- GET /castles
+Response:
+```json
+[
+    {
+    "id": 0,
+    "name": "string",
+    "summary": "string",
+    "url": "string",
+    "lat": 0,
+    "lng": 0
+  }
+]
+```
+
