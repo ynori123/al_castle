@@ -35,3 +35,6 @@
 # python
 */pyc
 __pycache__/
+
+# vscode 
+.vscode/
