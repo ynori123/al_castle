@@ -1,5 +1,8 @@
 FROM python:3.9-slim
 
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
+
 WORKDIR /app
 
 COPY ./requirements.txt /app/requirements.txt
