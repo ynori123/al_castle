@@ -22,11 +22,13 @@ def calc_distance(lat1, lon1, lat2, lon2):
 
     return distance
 
-# テスト用の緯度・経度
-lat1 = 35.6895
-lon1 = 139.6917
-lat2 = 34.7025
-lon2 = 135.4958
+def test_calc_distance() -> None:
+    # テスト用の緯度・経度
+    lat1 = 35.6895
+    lon1 = 139.6917
+    lat2 = 34.7025
+    lon2 = 135.4958
 
-# 二地点間の距離を計算
-distance = calc_distance(lat1, lon1, lat2, lon2)
+    # 二地点間の距離を計算
+    distance = calc_distance(lat1, lon1, lat2, lon2)
+    print(distance)
