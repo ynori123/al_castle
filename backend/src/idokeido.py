@@ -31,4 +31,4 @@ def test_calc_distance() -> None:
 
     # 二地点間の距離を計算
     distance = calc_distance(lat1, lon1, lat2, lon2)
-    print(distance)
+    print("地点A ",lat1,",",lon1,"\n地点B ",lat2,",",lon2,"\n距離:",distance,"\n")
