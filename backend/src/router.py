@@ -1,10 +1,12 @@
 from fastapi import (
     APIRouter,
-    Depends
 )
 from typing import List
 from src.schema import (
-    ResponseCastle
+    ResponseCastle,
+    RequestCastle,
+    ResponseTravel,
+    RequestTravel
 )
 from src.model import (
     Castle
@@ -19,9 +21,17 @@ router = APIRouter()
 
 
 @router.get("/ping")
-def ping():
+async def ping():
     return {"ping" : "pong"}
 
 @router.get("/castles", response_model=List[ResponseCastle])
-def get_castles() -> List[Castle]:
+async def get_castles() -> List[Castle]:
     return get_castles()
+
+@router.get("/castles/{id}", response_model=ResponseCastle)
+async def get_castle(id: int) -> Castle:
+    return get_castle(id)
+
+@router.post("/travel")
+async def travel(data: RequestTravel):
+    pass
