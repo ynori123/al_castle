@@ -21,10 +21,13 @@ fell_castles{
 castles {
     bigint id PK
     varchar name
-    varchar summary "概要・定休日・営業時間"
-    varchar url 
+    varchar prefecture "都道府県"
     float lat "緯度(北緯)"
     float lng "経度(東経)"
+    varchar holiday "定休日"
+    varchar admission_time "入場可能時間"
+    bigint admission_fee "入場料"
+    varchar stamp "スタンプ設置場所"    
 }
 restaurants { 
     bigint id PK
@@ -48,9 +51,9 @@ castle_distances {
 |GET|/castles|城の情報|
 |GET|/castles/{castle_id}|城の詳細情報|
 |POST|/travel|最短経路検索|
-|POST|/user/signin|ログイン|
-|POST|/user/signup|アカウント登録|
-|GET|/log/{user_id}|今まで落とした城|
+|POST|/user/signin|(時間があれば)ログイン|
+|POST|/user/signup|(時間があれば)アカウント登録|
+|GET|/log/{user_id}|(時間があれば)今まで落とした城|
 
 
 - GET /castles
@@ -67,4 +70,4 @@ Response:
   }
 ]
 ```
-
+- 
