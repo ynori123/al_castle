@@ -3,16 +3,16 @@
 ```mermaid
 erDiagram
 castles ||--|{ restaurants : ""
-users ||--o{ fell_castles : ""
-fell_castles ||--|| castles : ""
+"users(余裕があれば)" ||--o{ "fell_castles(余裕があれば)" : ""
+"fell_castles(余裕があれば)" ||--|| castles : ""
 castles }|--|| castle_distances : ""
 
-users{
+"users(余裕があれば)"{
     bigint id PK
     varchar name 
     barchar password 
 }
-fell_castles{
+"fell_castles(余裕があれば)"{
     bigint id PK
     bigint user_id FK
     bigint castle_id FK
@@ -33,14 +33,17 @@ restaurants {
     bigint id PK
     bigint castle_id FK 
     varchar name
-    varchar summary
+    varchar time "営業時間"
+    varchar holiday "定休日"
+    varchar genre "ジャンル"
     varchar url 
 }
 castle_distances {
     bigint id PK
     bigint castle_id1 FK
     bigint castle_id2 FK
-    double distance 
+    double direct_distance "直線距離"
+    double way_distance "道のりの距離"
     datetime time "GoogleMap APIから取得したもの"
 }
 ```
