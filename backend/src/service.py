@@ -3,10 +3,11 @@ from src.model import (
     Castle,
     Restaurant
 )
+from src.database import get_db
 
 
 
-def load_data():
+def load_data() -> tuple[list[Castle], list[Restaurant]]:
     castle_data = []
     with load_workbook("castle_data.xlsx") as wb:
         # 飲食店データの読み込み
@@ -42,3 +43,10 @@ def load_data():
             )
             restaurant_data.append(castle)
         return castle_data, restaurant_data
+
+def write_data(castle_data: list[Castle], restaurant_data: list[Restaurant]):
+    with get_db() as db:
+        db.add_all(castle_data)
+        db.add_all(restaurant_data)
+        db.commit()
+    return
