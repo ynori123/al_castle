@@ -1,7 +1,14 @@
 from fastapi import FastAPI
-from router import router as rt
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine, Base
+from src.router import router as rt
+from src.database import (
+    engine,
+    Base
+)
+from src.service import (
+    load_data, 
+    write_data
+)
 
 app = FastAPI()
 
@@ -17,7 +24,11 @@ app.include_router(router=rt)
 
 
 @app.on_event("startup")
-async def migrate():
+def startup():
+    migrate()
+    write_data(load_data())
+
+def migrate():
     print("create tables...")
     try:
         Base.metadata.create_all(bind=engine)
