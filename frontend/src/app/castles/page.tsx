@@ -1,6 +1,7 @@
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Castles() {
   return (
@@ -8,7 +9,7 @@ export default function Castles() {
       <Navbar />
       <main className="container mx-auto">
         <Header
-          title="城一覧"
+          title="百名城一覧"
           discription="百名城一覧および，その周辺の観光情報をご紹介します．"
         />
 
@@ -29,6 +30,7 @@ export default function Castles() {
           }
         </div>
       </main>
+      <Footer />
     </>
   );
 }
