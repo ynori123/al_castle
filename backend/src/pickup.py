@@ -2,14 +2,14 @@ from castle import Castle
 from idokeido import calc_distance
 
 '''
-○ある城から近い城を5箇所list型で返す
+○ pickup_near5 : 開始地点から近い城を5箇所list型で返す
 引数
 ・castles：百名城全部入ったリスト
 ・current_lat：開始地点の緯度
 ・current_lon：開始地点の経度
 '''
 
-# 距離が短い五つの城をリストにまとめて返す関数
+# 開始地点から距離が近い五つの城をリストにまとめて返す関数
 def pickup_near5(castles, current_lat, current_lon):
     distances = []
     for castle in castles:
@@ -24,8 +24,35 @@ def pickup_near5(castles, current_lat, current_lon):
     
     return nearest_castles
 
+
+
+'''
+○ pickup_inRadius : 開始地点から近い城を5箇所list型で返す
+引数
+・castles：百名城全部入ったリスト
+・current_lat：開始地点の緯度
+・current_lon：開始地点の経度
+・radius：探索半径(km)
+'''
+
+#開始地点から探索範囲内(半径：radius)に入る城をリスト型で返す関数
+def pickup_inRadius(castles, current_lat, current_lon, radius):
+    # 探索範囲内の城を格納するリスト
+    search_result = []
+
+    for castle in castles:
+        # 現在地と城の距離を計算
+        distance = calc_distance(current_lat, current_lon, castle.lat, castle.lon)
+        
+        # 距離が探索範囲内の場合、リストに追加
+        if distance <= radius:
+            search_result.append(castle)
+
+    return search_result
+
+
 # テストメソッド
-def test():
+def test_pickup_near5():
     # 城のリストを作成
     castles = [
         Castle("Castle A", 35.6895, 139.6917),
@@ -51,4 +78,34 @@ def test():
     for castle in nearest_castles:
         print(castle.name)
 
-test()
+
+def test_search_castles():
+    # テスト用の城データ
+    castles = [
+        Castle("城1", 35.123, 139.456),
+        Castle("城2", 35.678, 139.789),
+        Castle("城3", 36.123, 140.456)
+    ]
+
+    # 現在地の緯度・経度と探索範囲の半径
+    current_lat = 35.0
+    current_lon = 139.0
+    radius = 100.0
+
+    # 検索結果の期待値
+    expected_result = [
+        Castle("城1", 35.123, 139.456),
+        Castle("城2", 35.678, 139.789)
+    ]
+
+    # 探索結果を取得
+    result = search_castles(castles, current_lat, current_lon, radius)
+
+    # 検証
+    assert len(result) == len(expected_result)
+    for i in range(len(result)):
+        assert result[i].name == expected_result[i].name
+        assert result[i].lat == expected_result[i].lat
+        assert result[i].lon == expected_result[i].lon
+
+    print("テストがパスしました")
