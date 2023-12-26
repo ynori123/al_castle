@@ -8,7 +8,10 @@ type Props = {
 
 const Card = ({ id, title, discription, img, tags }: Props) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
+    <a
+      className="max-w-sm rounded overflow-hidden shadow-lg m-4"
+      href={`castles/${id}`}
+    >
       <img
         className="w-full aspect-video overflow-hidden object-cover"
         src={img}
@@ -22,7 +25,7 @@ const Card = ({ id, title, discription, img, tags }: Props) => {
           {discription}
         </p>
       </div>
-    </div>
+    </a>
   );
 };
 
