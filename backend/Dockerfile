@@ -6,7 +6,7 @@ ENV TZ Asia/Tokyo
 WORKDIR /app
 
 COPY ./requirements.txt /app/requirements.txt
-COPY ./src/.env /app/.env
+COPY ./.env /app/.env
 RUN apt update && apt-get update
 RUN apt install -y postgresql postgresql-contrib
 RUN apt-get install -y --no-install-recommends build-essential libpq-dev

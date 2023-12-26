@@ -1,8 +1,10 @@
-from pydantic import (
+from typing import ClassVar
+from pydantic_settings import (
     BaseSettings,
 )
 import os
 
 class Setting(BaseSettings):
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-    
+    DATABASE_URL: ClassVar[str] = os.environ.get('DATABASE_URL')
+
+setting = Setting()

@@ -26,7 +26,11 @@ app.include_router(router=rt)
 @app.on_event("startup")
 def startup():
     migrate()
-    write_data(load_data())
+    try:
+        write_data(load_data())
+    except Exception as e:
+        print(e)
+        pass
 
 def migrate():
     print("create tables...")
