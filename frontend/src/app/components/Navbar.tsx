@@ -49,7 +49,7 @@ const Navbar = ({ isDark }: Props) => {
               百名城一覧
             </a>
             <a
-              href="/routes"
+              href="/travel"
               className="block mt-4 lg:inline-block lg:mt-0 text-slate-900 hover:text-slate-500 mr-4"
             >
               経路検索ツール
