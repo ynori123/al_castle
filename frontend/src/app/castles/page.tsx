@@ -1,9 +1,11 @@
 import Card from "../components/Card";
 import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 
 export default function Castles() {
   return (
     <>
+      <Navbar />
       <main className="container mx-auto">
         <Header
           title="城一覧"
