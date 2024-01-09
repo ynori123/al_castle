@@ -16,6 +16,7 @@ export default function Castles() {
         <div className="flex flex-wrap justify-center">
           {
             // 100個のカードを生成
+            // TODO:なんかいい感じにデータを入れていく
             Array.from(Array(100).keys()).map((i) => {
               return (
                 <Card

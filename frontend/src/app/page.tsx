@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 export default function Home() {
   return (
     <>
-      <Navbar isDark={true} />
+      <Navbar />
 
       <div className="bg">
         <div className="relative isolate px-6 pt-14 lg:px-8">
