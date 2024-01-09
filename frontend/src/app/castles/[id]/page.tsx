@@ -8,16 +8,16 @@ import TableItem from "@/app/components/table/TableItem";
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
-      <Navbar isDark={true} />
+      <Navbar />
       <main className="container mx-auto">
         <div className="flex">
           <div className="text-left pt-32 w-3/4">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              大阪城
+              城名
             </h1>
-            {/* <p className="mt-6 text-lg leading-8 text-gray-600">
-              大阪城は，大阪府大阪市中央区にある日本の城です．
-            </p> */}
+            {/* TODO:なんかいい感じにデータを入れていく
+						{params.id}には城のIDが入ってきます
+             */}
 
             <div className="pt-20">
               <table className="w-3/4 text-sm text-left  text-gray-500 dark:text-gray-400">
