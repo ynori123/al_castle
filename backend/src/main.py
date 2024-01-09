@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from src.router import router as rt
 from src.database import (
     engine,
@@ -19,7 +20,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
+app.mount("/image", StaticFiles(directory="image"), name="image")
 app.include_router(router=rt)
 
 
