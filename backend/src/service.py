@@ -1,56 +1,72 @@
+from fastapi import Depends
 from openpyxl import load_workbook
 from src.model import (
     Castle,
     Restaurant
 )
-from src.database import get_db
-
+from src.database import SessionLocal
+from logging import getLogger
+logger = getLogger("uvicorn.app")
 
 
 def load_data() -> tuple[list[Castle], list[Restaurant]]:
     castle_data = []
+    restaurant_data = []
     try:
-        with load_workbook("castle_data.xlsx") as wb:
-            # 飲食店データの読み込み
-            ws = wb["castle_data"]
-            for col in ws.iter_cols(min_row=2, max_row=ws.max_row, min_col=1, max_col=ws.max_column):
-                if col[0].value.isdecimal() == False:
-                    # 1列目が数字でない場合はスキップ
-                    continue
-                castle = Castle(
-                    name=col[1].value,
-                    prefecture=col[2].value,
-                    lat=float(col[3].value),
-                    lng=float(col[4].value),
-                    holiday=col[5].value,
-                    admission_time=col[6].value,
-                    admission_fee=col[7].value,
-                    stamp=col[8].value
-                )
-                castle_data.append(castle)
-            restaurant_data = []
-            ws = wb["meal"]
-            for col in ws.iter_cols(min_row=2, max_row=ws.max_row, min_col=1, max_col=ws.max_column):
-                if col[0].value.isdecimal() == False:
-                    # 1列目が数字でない場合はスキップ
-                    continue
-                restaurant = Restaurant(
-                    castle_id=int(col[1].value),
-                    name=col[2].value,
-                    time=col[3].value,
-                    holiday=col[5].value,
-                    genre=col[6].value,
-                    url=col[7].value,
-                )
-                restaurant_data.append(castle)
-            return castle_data, restaurant_data
+        wb = load_workbook("castle_data.xlsx")
+        print("start load data")
+        # 飲食店データの読み込み
+        ws = wb["castle_data"]
+        for row in ws.iter_rows(min_row=2, max_row=ws.max_row, min_col=1, max_col=ws.max_column):
+            
+            if isinstance(row[0].value, int) == False:
+                # 1列目が数字でない場合はスキップ
+                logger.info(row[0].value)
+                continue
+            castle = Castle(
+                name=row[1].value,
+                prefecture=row[2].value,
+                lat=float(row[3].value),
+                lng=float(row[4].value),
+                holiday=row[5].value,
+                admission_time=row[6].value,
+                admission_fee=row[7].value,
+                stamp=row[8].value
+            )
+            castle_data.append(castle)
+        logger.info("finish load castle data")
+        logger.info("start load meal data")
+        ws = wb["meal"]
+        for row in ws.iter_rows(min_row=2, max_row=ws.max_row, min_col=1, max_col=ws.max_column):
+            if isinstance(row[0].value, int) == False or isinstance(row[1].value, int) == False:
+                # 1列目が数字でない場合はスキップ
+                logger.info(f"load-error: {row[0].value}, type: {type(row[0].value)} / {row[1].value}, type: {type(row[1].value)}")
+                continue
+            restaurant = Restaurant(
+                castle_id=int(row[1].value),
+                name=row[2].value,
+                time=row[3].value,
+                holiday=row[4].value,
+                genre=row[5].value,
+                url=row[6].value,
+            )
+            restaurant_data.append(restaurant)
+        logger.info("finish load meal data")
+        return (castle_data, restaurant_data)
     except Exception as e:
-        print(e)
+        logger.info(f"error: {e}")
         return 
 
 def write_data(castle_data: list[Castle], restaurant_data: list[Restaurant]):
-    with get_db() as db:
-        db.add_all(castle_data)
-        db.add_all(restaurant_data)
-        db.commit()
+    with SessionLocal() as db:
+        try:
+            if db.query(Castle).count() == 0:
+                db.add_all(castle_data)
+            if db.query(Restaurant).count() == 0:
+                valid_restaurant_data = [r for r in restaurant_data if r.name and r.genre is not None]
+                db.add_all(valid_restaurant_data)
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            raise e
     return
