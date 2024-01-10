@@ -21,7 +21,7 @@ class Castle(Base):
     lng = Column(Double(8, False, 5), nullable=False)
     holiday = Column(String(256), nullable=True)
     admission_time = Column(String(256), nullable=True)
-    admission_fee = Column(Integer, nullable=True)
+    admission_fee = Column(String(256), nullable=True)
     stamp = Column(String(256), nullable=True)
 
     restaurants = relationship("Restaurant", backref="castle")
@@ -30,11 +30,11 @@ class Restaurant(Base):
     __tablename__ = "restaurants"
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True, nullable=False)
     castle_id = Column(Integer, ForeignKey("castles.id"))
-    name = Column(String(128), nullable=False)
-    time = Column(String(128), nullable=True)
-    holiday = Column(String(256), nullable=True)
-    genre = Column(String(256), nullable=False)
-    url = Column(String(256), nullable=True)
+    name = Column(String(128))
+    time = Column(String(128))
+    holiday = Column(String(256))
+    genre = Column(String(256))
+    url = Column(String(256))
 
 class CastleDistance(Base):
     __tablename__ = "castle_distances"
