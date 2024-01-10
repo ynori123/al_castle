@@ -26,8 +26,8 @@ class RequestCastle(BaseModel):
     class Congig:
         orm_mode = True
 class ResponseTravel(BaseModel):
-    castle1: str
-    castle2: str
+    origin: str
+    destination: str
     admission_distance: float
     way_distance: float
     time: str
@@ -36,8 +36,8 @@ class ResponseTravel(BaseModel):
         orm_mode = True
 
 class RequestTravel(BaseModel):
-    castle1: int
-    castle2: int
+    origin: int
+    destination: int
 
     class Congig:
         orm_mode = True
