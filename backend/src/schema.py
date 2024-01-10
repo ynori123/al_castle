@@ -18,13 +18,13 @@ class ResponseCastle(BaseModel):
     stamp: Optional[str] = Field(default="No stamp information")
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class RequestCastle(BaseModel):
     castle_id: int
     
     class Congig:
-        orm_mode = True
+        from_attributes = True
 class ResponseTravel(BaseModel):
     origin: str
     destination: str
@@ -33,11 +33,11 @@ class ResponseTravel(BaseModel):
     time: str
 
     class Congig:
-        orm_mode = True
+        from_attributes = True
 
 class RequestTravel(BaseModel):
     origin: int
     destination: int
 
     class Congig:
-        orm_mode = True
+        from_attributes = True
