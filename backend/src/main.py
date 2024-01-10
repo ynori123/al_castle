@@ -1,10 +1,11 @@
+from logging import getLogger
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from src.router import router as rt
 from src.database import (
     engine,
-    Base
+    Base,
 )
 from src.service import (
     load_data, 
@@ -22,22 +23,29 @@ app.add_middleware(
 )
 app.mount("/image", StaticFiles(directory="image"), name="image")
 app.include_router(router=rt)
+logger = getLogger("uvicorn.app")
 
 
 @app.on_event("startup")
 def startup():
     migrate()
     try:
-        write_data(load_data())
+        logger.info("start load data")
+        data = load_data()
+        logger.info("finish load data")
+        # logger.info(data)
+        logger.info("start write data")
+        write_data(data[0], data[1])
+        logger.info("finish write data")
     except Exception as e:
-        print(e)
+        logger.info(e)
         pass
 
 def migrate():
-    print("create tables...")
+    logger.info("create tables...")
     try:
         Base.metadata.create_all(bind=engine)
-        print("done")
+        logger.info("migrate done.")
     except Exception as e:
-        print(e)
+        logger.info(e)
         pass
