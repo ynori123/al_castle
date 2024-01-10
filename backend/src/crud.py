@@ -9,7 +9,7 @@ def fetch_castles(db: Session) -> List[Castle]:
     castles = db.query(Castle).all()
     return castles
 
-def specific_castle(db: Session, id: int) -> Castle:
+def fetch_specific_castles(db: Session, id: int) -> Castle:
     castle = db.query(Castle).filter_by(id=id).first()
     return castle
 
