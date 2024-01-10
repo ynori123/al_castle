@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import (
     BaseModel,
     Field
@@ -6,12 +7,17 @@ from pydantic import (
 class ResponseCastle(BaseModel):
     id: int
     name: str
-    summary: str
-    url: str
+    summary: Optional[str] = Field(default="No summary provided")
+    prefecture: str
+    url: Optional[str] = Field(default="No URL provided")
     lat: float
     lng: float
+    holiday: Optional[str] = Field(default="No holiday information")
+    admission_time: Optional[str] = Field(default="No admission time information")
+    admission_fee: Optional[str] = Field(default="No admission fee information")
+    stamp: Optional[str] = Field(default="No stamp information")
 
-    class Congig:
+    class Config:
         orm_mode = True
 
 class RequestCastle(BaseModel):

@@ -1,5 +1,6 @@
 from fastapi import (
     APIRouter,
+    Depends,
 )
 from typing import List
 from src.schema import (
@@ -12,7 +13,8 @@ from src.model import (
     Castle
 )
 from src.crud import (
-    get_castles
+    fetch_castles,
+    fetch_specific_castles
 )
 from src.database import get_db
 from sqlalchemy.orm import Session
@@ -25,12 +27,12 @@ async def ping():
     return {"ping" : "pong"}
 
 @router.get("/castles", response_model=List[ResponseCastle])
-async def get_castles() -> List[Castle]:
-    return get_castles()
+async def get_castles(db: Session = Depends(get_db)) -> List[Castle]:
+    return fetch_castles(db=db)
 
 @router.get("/castles/{id}", response_model=ResponseCastle)
-async def get_castle(id: int) -> Castle:
-    return get_castle(id)
+async def get_castle(id: int, db: Session = Depends(get_db)) -> Castle:
+    return fetch_specific_castles(id=id, db=db)
 
 @router.post("/travel")
 async def travel(data: RequestTravel):
