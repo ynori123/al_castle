@@ -32,7 +32,7 @@ async def get_castles(db: Session = Depends(get_db)) -> List[Castle]:
 
 @router.get("/castles/{id}", response_model=ResponseCastle)
 async def get_castle(id: int, db: Session = Depends(get_db)) -> Castle:
-    return fetch_specific_castles(id)
+    return fetch_specific_castles(id=id, db=db)
 
 @router.post("/travel")
 async def travel(data: RequestTravel):
