@@ -2,14 +2,11 @@ from sqlalchemy import (
     Column, 
     Integer, 
     String, 
-    Text, 
     Double,
     ForeignKey,
     DateTime
 )
-from sqlalchemy.orm import (
-    relationship
-)
+from sqlalchemy.orm import relationship
 from src.database import Base
 
 class Castle(Base):
