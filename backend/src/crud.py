@@ -16,3 +16,16 @@ def fetch_specific_castles(db: Session, id: int) -> Castle:
 def fetch_current_route(db: Session, dep_id: int, arr_id: int) -> Result:
     current_route = db.query(CastleDistance).filter_by(castle_id_1=dep_id, arr_id=arr_id).first()
     return current_route
+
+def travel(dep: str, arr: str, castles: List[int], db: Session = Depends(get_db)):
+    route = []
+    length = len(castles)
+    if length >= 2:
+        for i in range(1, len(castles)):
+            route[i] = fetch_current_route(db=db, dep_id=castles[i-1], arr_id=castles[i])
+            if route[i] is None:
+                call_route_api(db=db, dep=dep, arr=arr)
+    pass
+
+def call_route_api(db: Session, dep: str, arr: str):
+    pass
