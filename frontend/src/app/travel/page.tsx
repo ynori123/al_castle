@@ -15,11 +15,32 @@ export default function Travel() {
           discription="百名城の最短経路算出ツールです。行きたい城にすべてチェックを入れ，検索ボタンを押してください．"
         />
 
-        <form action="/travel/result" method="post">
+        <form action="/travel/result" method="post" className="mx-64">
           {/* 全城分のチェックボックス */}
-
-          <div className="flex flex-wrap justify-center">
-            <div className="flex flex-wrap mx-64">
+          <div className="flex mb-5">
+            <label className="block text-lg font-bold mb-3 w-40">出発地</label>
+            <input
+              className="bg-gray-200 appearance-none border-2 flex-1 border-gray-200 w-4/5 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-full-name"
+              type="text"
+            />
+          </div>
+          <div className="flex mb-5">
+            <label className="block text-lg font-bold mb-3 w-40">到着地</label>
+            <input
+              className="bg-gray-200 appearance-none border-2 flex-1 border-gray-200 w-4/5 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-full-name"
+              type="text"
+            />
+            <button
+              className="rounded-md bg-indigo-600 ml-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              type="submit"
+            >
+              出発地と到着地を同じにする
+            </button>
+          </div>
+          <div className="flex flex-wrap justify-center mb-5">
+            <div className="flex flex-wrap">
               <label className="block text-lg font-bold mb-3">
                 行きたい城を選択
               </label>
@@ -45,7 +66,13 @@ export default function Travel() {
               </ul>
             </div>
           </div>
+          <div>
+            <label className="block text-lg font-bold mb-3">
+              回る順番を指定
+            </label>
 
+            <p>作れてません</p>
+          </div>
           <div className="my-10 flex items-center justify-center gap-x-6">
             <button
               className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
