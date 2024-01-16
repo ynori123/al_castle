@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+import SmallCard from "../components/SmallCard";
+
 //出発地点
 //
 export default function Routes() {
@@ -59,7 +61,42 @@ export default function Routes() {
             <div className="mb-6 mt-5">
               <div className="mb-5">
                 <h4 className="block text-xl font-bold mb-3 w-40">★近畿地方</h4>
-                <div>ここいってここいく</div>
+                <div>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専出発</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        月曜日 8:30ごろ
+                      </p>
+                    </div>
+                  </div>
+                  <SmallCard
+                    id={1}
+                    title="大阪城"
+                    discription="金曜日 16:30ごろ"
+                    img="osaka.jpg"
+                  ></SmallCard>
+                  <SmallCard
+                    id={2}
+                    title="ラーメン城"
+                    discription="金曜日 16:30ごろ"
+                    img="ramen.jpg"
+                  ></SmallCard>
+                  <SmallCard
+                    id={1}
+                    title="大阪城"
+                    discription="金曜日 16:30ごろ"
+                    img="osaka.jpg"
+                  ></SmallCard>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専到着</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        月曜日 8:30ごろ
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <div className="flex items-center justify-center">
                   <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     詳細データをダウンロード(.xlsx)
