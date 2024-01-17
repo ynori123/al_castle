@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic import (
     BaseModel,
     Field
@@ -21,21 +21,23 @@ class ResponseCastle(BaseModel):
 class RequestCastle(BaseModel):
     castle_id: int
     
-    class Congig:
+    class Config:
         from_attributes = True
 class ResponseTravel(BaseModel):
-    origin: str
-    destination: str
-    admission_distance: float
-    way_distance: float
-    time: str
+    dep: str
+    arr: str
+    way_distance: List[float]
+    way_time: List[str]
+    total_distance: float
+    total_time: str
 
-    class Congig:
+    class Config:
         from_attributes = True
 
 class RequestTravel(BaseModel):
-    origin: int
-    destination: int
+    dep: str
+    arr: str
+    castle: List[int]
 
-    class Congig:
+    class Config:
         from_attributes = True
