@@ -1,4 +1,5 @@
-from castle import Castle
+from typing import List
+from model import Castle
 from idokeido import calc_distance
 
 '''
@@ -10,10 +11,10 @@ from idokeido import calc_distance
 '''
 
 # 開始地点から距離が近い五つの城をリストにまとめて返す関数
-def pickup_near5(castles, current_lat, current_lon):
+def pickup_near5(castles: List[Castle], current_lat: float, current_lon: float):
     distances = []
     for castle in castles:
-        distance = calc_distance(current_lat, current_lon, castle.lat, castle.lon)
+        distance = calc_distance(current_lat, current_lon, castle.lat, castle.lng)
         distances.append((castle, distance))
     
     distances.sort(key=lambda x: x[1]) # 距離で昇順にソート
