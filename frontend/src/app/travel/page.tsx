@@ -12,6 +12,7 @@ export default function Travel() {
   const [start, setStart] = useState<string>("");
   const [goal, setGoal] = useState<string>("");
   const [isStop, setIsStop] = useState<boolean[]>(Array(100).fill(false));
+  const [stopCastle, setStopCastle] = useState<number[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
@@ -22,7 +23,18 @@ export default function Travel() {
   }, []);
   const handleSubmit = () => {
     // TODO
-  }
+    console.log(stopCastle);
+
+  };
+  const handleChangeCheckbox = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)]);
+    if(stopCastle.includes(i + 1)){
+      setStopCastle(stopCastle.filter(value => value !== i + 1));
+    }else{
+      setStopCastle([...stopCastle, i + 1]);
+    }
+    // console.log(stopCastle);
+  };
 
   return (
     <>
@@ -33,7 +45,7 @@ export default function Travel() {
           discription="百名城の最短経路算出ツールです。行きたい城にすべてチェックを入れ，検索ボタンを押してください．"
         />
 
-        <form className="mx-64">
+        <div className="mx-64">
           {/* 全城分のチェックボックス */}
           <div className="flex mb-5">
             <label className="block text-lg font-bold mb-3 w-40">出発地</label>
@@ -76,7 +88,7 @@ export default function Travel() {
                         type="checkbox"
                         name="castles"
                         checked={isStop[i]}
-                        onChange={() => setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)])}
+                        onChange={(e) => handleChangeCheckbox(i, e)}
                       />
                       <a className="text-sm hover:underline" href={"/castles/" + (i + 1)}>
                         {i + 1}. {item.name}
@@ -92,7 +104,7 @@ export default function Travel() {
               回る順番を指定
             </label>
 
-            <p>作れてません</p>
+            <p>回る城の数: {isStop.filter(value => value === true).length}-{stopCastle.length}</p>
           </div>
           <div className="my-10 flex items-center justify-center gap-x-6">
             <button
@@ -108,7 +120,7 @@ export default function Travel() {
               リセット
             </button>
           </div>
-        </form>
+        </div>
       </main>
       <Footer />
     </>
