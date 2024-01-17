@@ -28,7 +28,6 @@ type restaurantSchema = {
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  console.log(params.id);
   const img_url = useRef(`${process.env.NEXT_PUBLIC_API_URL}/image/${params.id}.jpg`)
   const [castleData, setCastleData] = useState<castleSchema>({ id: 0, name: "", prefecture: "", lat: 0, lng: 0, holiday: "", admission_time: "", admission_fee: "", stamp: "", restaurant: [{ name: "", time: "", holiday: "", genre: "", url: "" }]});
   useEffect(() => {
@@ -82,36 +81,26 @@ export default function Page({ params }: { params: { id: string } }) {
             <img
               className="w-full aspect-auto overflow-hidden object-cover"
               src={img_url.current}
-              alt="大阪城"
+              alt={castleData.name}
             />
           </div>
         </div>
         <Header title="周辺の観光情報" />
         <div className="flex flex-wrap justify-center">
-          <MealCard
-            id={1}
-            title="ラーメン屋です"
-            time="10:00-17:00"
-            holiday="毎週土曜日"
-            genre="ラーメン"
-            img="/ramen.jpg"
-          />
-          <MealCard
-            id={1}
-            title="ラーメン屋です"
-            time="10:00-17:00"
-            holiday="毎週土曜日"
-            genre="ラーメン"
-            img="/ramen.jpg"
-          />
-          <MealCard
-            id={1}
-            title="ラーメン屋です"
-            time="10:00-17:00"
-            holiday="毎週土曜日"
-            genre="ラーメン"
-            img="/ramen.jpg"
-          />
+          {
+            castleData.restaurant.map((item, i) => {
+              return (
+                <MealCard
+                  title={item.name}
+                  time={item.time}
+                  holiday={item.holiday}
+                  genre={item.genre}
+                  url={item.url}
+                  key={i}
+                />
+              );
+            })
+          }
         </div>
       </main>
       <Footer />

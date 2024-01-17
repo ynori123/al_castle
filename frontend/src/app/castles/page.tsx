@@ -10,7 +10,6 @@ export default function Castles() {
   const [castleData, setCastleData] = useState<{ id: number, name: string, prefecture: string}[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
       const data = await res.json();
       setCastleData(data);
