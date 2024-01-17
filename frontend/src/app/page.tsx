@@ -11,7 +11,7 @@ export default function Home() {
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Data to enrich your online business
+                Data to enrich your castle tour
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
                 百名城の経路探索ツールのほか，各城の説明や周辺の観光案内を提供しています．
