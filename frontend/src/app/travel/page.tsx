@@ -139,11 +139,11 @@ export default function Travel() {
               stopCastle.map((item, i) => {
                 return (
                   <div className="flex items-center gap-x-6 bg-slate-300 my-2 w-[300px] h-[50px]" key={i}>
-                    <div className="w-full flex py-4">
-                      <div className="w-2/3">
+                    <div className="w-full flex">
+                      <div className="w-2/3 my-auto">
                         <p className="py-4 font-semibold pl-4 justify-center">{item}. {castleData[item - 1].name}</p>
                       </div>
-                      <div className="justify-end py-4 w-1/3">
+                      <div className="justify-end my-auto py-1 w-1/3">
                         <button className="mx-2 w-1/4 hover:opacity-50" onClick={(e) => handleUp(e, item)} disabled={i === 0} >
                           {i !== 0 && <UpSvg />}
                         </button>
