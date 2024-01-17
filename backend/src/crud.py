@@ -49,6 +49,7 @@ def fetch_travel(db: Session, arr: str, dep: str, castles: List[int]) -> Result:
     return {
         "dep": dep,
         "arr": arr,
+        "castles": castles,
         "way_distance": distace,
         "way_time": way_time_str,
         "total_distance": sum(distace),
