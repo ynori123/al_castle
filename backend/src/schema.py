@@ -15,6 +15,11 @@ class Restaurant(BaseModel):
     class Config:
         from_attributes = True
 
+class ResponseCastleSimple(BaseModel):
+    id: int
+    name: str
+    prefecture: str
+
 class ResponseCastle(BaseModel):
     id: int
     name: str

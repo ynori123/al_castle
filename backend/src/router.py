@@ -6,6 +6,7 @@ from typing import List
 from src.schema import (
     ResponseCastle,
     RequestCastle,
+    ResponseCastleSimple,
     ResponseTravel,
     RequestTravel
 )
@@ -14,7 +15,6 @@ from src.model import (
 )
 from src.crud import (
     fetch_castles,
-    fetch_restaurants,
     fetch_specific_castles,
     fetch_travel
 )
@@ -28,7 +28,7 @@ router = APIRouter()
 async def ping():
     return {"ping" : "pong"}
 
-@router.get("/castles", response_model=List[ResponseCastle])
+@router.get("/castles", response_model=List[ResponseCastleSimple])
 async def get_castles(db: Session = Depends(get_db)) -> List[Castle]:
     return fetch_castles(db=db)
 

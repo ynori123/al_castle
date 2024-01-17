@@ -10,11 +10,11 @@ const TableItem = ({ title, discription, isTail }: props) => {
       <tr className="bg-white border-b">
         <th
           scope="row"
-          className="px-4 py-3 font-medium whitespace-nowrap dark:text-white"
+          className="px-4 py-3 font-medium whitespace-nowrap text-black"
         >
           {title}
         </th>
-        <td className="px-4 py-3 text-gray-900">{discription}</td>
+        <td className="px-4 py-3 text-gray-700">{discription}</td>
       </tr>
     );
   } else {
@@ -22,11 +22,11 @@ const TableItem = ({ title, discription, isTail }: props) => {
       <tr className="bg-white">
         <th
           scope="row"
-          className="px-4 py-3 font-medium whitespace-nowrap dark:text-white"
+          className="px-4 py-3 font-medium whitespace-nowrap text-black"
         >
           {title}
         </th>
-        <td className="px-4 py-3 text-gray-900">{discription}</td>
+        <td className="px-4 py-3 text-gray-700">{discription}</td>
       </tr>
     );
   }

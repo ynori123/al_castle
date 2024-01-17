@@ -4,15 +4,22 @@ from sqlalchemy.engine import Result
 from src.model import Castle, CastleDistance, Restaurant
 from src.schema import (
     ResponseCastle,
+    ResponseCastleSimple,
     Restaurant as ResponseRestaurant
 )
 from src.google_api import fetch_googlemap_api
-import re
 from fastapi import HTTPException
 
 def fetch_castles(db: Session) -> List[Castle]:
     castles = db.query(Castle).all()
-    return castles
+    res = []
+    for castle in castles:
+        res.append(ResponseCastleSimple(
+            id=castle.id,
+            name=castle.name,
+            prefecture=castle.prefecture
+        ))
+    return res
 
 def fetch_specific_castles(db: Session, id: int) -> ResponseCastle:
     castle = db.query(Castle).filter_by(id=id).first()
