@@ -14,10 +14,15 @@ type QueryProps = {
   arr: string,
   castle: string
 }
+type CastleResponse = {
+  id: number,
+  name: string,
+  prefecture: string
+}
 type DataResponse = {
   dep: string,
   arr: string,
-  castles: number[],
+  castles: CastleResponse[],
   way_distance: number[],
   way_time: string[],
   total_distance: number,
@@ -26,7 +31,7 @@ type DataResponse = {
 //出発地点
 //
 export default function Result({params, searchParams}: Props) {
-  const [result, setResult] = useState<DataResponse>({dep: searchParams.dep, arr: searchParams.arr, castles: searchParams.castle.split(',').map((item)=>Number(item)), way_distance: [0], way_time: ["計算中..."], total_distance: 0, total_time: "計算中..."});
+  const [result, setResult] = useState<DataResponse>({dep: searchParams.dep, arr: searchParams.arr, castles: [], way_distance: [0], way_time: ["計算中..."], total_distance: 0, total_time: "計算中..."});
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const search = async() => {
@@ -74,8 +79,7 @@ export default function Result({params, searchParams}: Props) {
                     <div className="ml-4 w-1 h-10 bg-indigo-300"></div>
                     <div className="h-10 w-3/4 bg-gray-200 items-center flex left-0 rounded-md">
                       <img src="/castle.svg" alt="" width={25} className="ml-3"/>
-
-                      {item}
+                      {item.name}
                     </div>
                   </div>
                 )
