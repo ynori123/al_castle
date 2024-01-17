@@ -3,7 +3,7 @@ import Card from "@/app/components/Card";
 import Header from "@/app/components/Header";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 
 type Props = {
   params: {}
@@ -27,6 +27,7 @@ type DataResponse = {
 //
 export default function Result({params, searchParams}: Props) {
   const [result, setResult] = useState<DataResponse>({dep: searchParams.dep, arr: searchParams.arr, castles: searchParams.castle.split(',').map((item)=>Number(item)), way_distance: [0], way_time: ["計算中..."], total_distance: 0, total_time: "計算中..."});
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const search = async() => {
       const q = {
@@ -44,11 +45,13 @@ export default function Result({params, searchParams}: Props) {
       const data: DataResponse = await res.json();
       console.log(data);
       setResult(data);
+      
     }
     search();
+    setIsLoading(false);
   }, []); 
-
-  return (
+  if (isLoading) return <p>Loading...</p>
+  else if(!isLoading) return (
     <>
       <Navbar />
       <main className="container mx-auto">
