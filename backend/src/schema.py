@@ -44,7 +44,7 @@ class RequestCastle(BaseModel):
 class ResponseTravel(BaseModel):
     dep: str
     arr: str
-    castles: List[int]
+    castles: List[ResponseCastleSimple]
     way_distance: List[float]
     way_time: List[str]
     total_distance: float
