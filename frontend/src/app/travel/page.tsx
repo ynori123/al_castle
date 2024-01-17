@@ -3,7 +3,9 @@ import Card from "../components/Card";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import UpSvg from "../components/icons/UpSvg";
+import DownSvg from "../components/icons/DownSvg";
 
 //出発地点
 //
@@ -21,6 +23,12 @@ export default function Travel() {
     }
     fetchData();
   }, []);
+  const handleReset = () => {
+    setStart("");
+    setGoal("");
+    setIsStop(Array(100).fill(false));
+    setStopCastle([]);
+  }
   const handleSubmit = () => {
     // TODO
     console.log(stopCastle);
@@ -34,6 +42,28 @@ export default function Travel() {
       setStopCastle([...stopCastle, i + 1]);
     }
     // console.log(stopCastle);
+  };
+  const handleUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: number) => {
+    let newStopCastle: number[] = [...stopCastle];
+    for(let i = 1; i < newStopCastle.length; i++){
+      if(newStopCastle[i] === item){
+        newStopCastle[i-1] = newStopCastle[i]
+        newStopCastle[i] = stopCastle[i-1]
+        break;
+      }
+    }
+    setStopCastle(newStopCastle);
+  };
+  const handleDown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: number) => {
+    let newStopCastle: number[] = [...stopCastle];
+    for(let i = 0; i < newStopCastle.length-1; i++){
+      if(newStopCastle[i] === item){
+        newStopCastle[i+1] = newStopCastle[i]
+        newStopCastle[i] = stopCastle[i+1]
+        break;
+      }
+    }
+    setStopCastle(newStopCastle);
   };
 
   return (
@@ -68,9 +98,9 @@ export default function Travel() {
             />
             <button
               className="rounded-md bg-indigo-600 ml-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              type="submit"
+              onClick={() => setGoal(start)}
             >
-              出発地と到着地を同じにする
+              到着地を出発地と同じにする
             </button>
           </div>
           <div className="flex flex-wrap justify-center mb-5">
@@ -104,7 +134,28 @@ export default function Travel() {
               回る順番を指定
             </label>
 
-            <p>回る城の数: {isStop.filter(value => value === true).length}-{stopCastle.length}</p>
+            <p>回る城の数: {stopCastle.length}</p>
+            {
+              stopCastle.map((item, i) => {
+                return (
+                  <div className="flex items-center gap-x-6 bg-slate-300 my-2 w-[300px] h-[50px]" key={i}>
+                    <div className="w-full flex py-4">
+                      <div className="w-2/3">
+                        <p className="py-4 font-semibold pl-4 justify-center">{item}. {castleData[item - 1].name}</p>
+                      </div>
+                      <div className="justify-end py-4 w-1/3">
+                        <button className="mx-2 w-1/4 hover:opacity-50" onClick={(e) => handleUp(e, item)} disabled={i === 0} >
+                          {i !== 0 && <UpSvg />}
+                        </button>
+                        <button className="mx-2 w-1/4 hover:opacity-50" onClick={(e) => handleDown(e, item)} disabled={i === stopCastle.length-1}>
+                          {i !== stopCastle.length-1 && <DownSvg />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
           </div>
           <div className="my-10 flex items-center justify-center gap-x-6">
             <button
@@ -115,7 +166,7 @@ export default function Travel() {
             </button>
             <button
               className="text-sm font-semibold leading-6 text-gray-900"
-              type="reset"
+              onClick={handleReset}
             >
               リセット
             </button>
