@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 //
 export default function Travel() {
   const [castleData, setCastleData] = useState<{ id: number, name: string, prefecture: string }[]>([]);
+  const [isStop, setIsStop] = useState<boolean[]>(Array(100).fill(false));
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
@@ -17,7 +18,9 @@ export default function Travel() {
     }
     fetchData();
   }, []);
-
+  const handleSubmit = () => {
+    // TODO
+  }
 
   return (
     <>
@@ -67,7 +70,8 @@ export default function Travel() {
                           className="mr-2 leading-tight"
                           type="checkbox"
                           name="castles"
-                          value={i + 1}
+                          checked={isStop[i]}
+                          onChange={() => setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)])}
                         />
                         <a className="text-sm" href={"/castles/" + (i + 1)}>
                           {i + 1}. {item.name}
@@ -89,7 +93,7 @@ export default function Travel() {
           <div className="my-10 flex items-center justify-center gap-x-6">
             <button
               className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              type="submit"
+              onClick={handleSubmit}
             >
               経路を検索する
             </button>
