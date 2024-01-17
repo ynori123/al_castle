@@ -8,8 +8,7 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 COPY ./.env /app/.env
 RUN apt update && apt-get update
-RUN apt install -y postgresql postgresql-contrib
-RUN apt-get install -y --no-install-recommends build-essential libpq-dev
+RUN apt-get install -y --no-install-recommends build-essential
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
