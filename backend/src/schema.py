@@ -4,6 +4,17 @@ from pydantic import (
     Field
 )
 
+
+class Restaurant(BaseModel):
+    name: str
+    time: Optional[str] = Field(default="営業時間情報なし")
+    holiday: Optional[str] = Field(default="定休日情報なし")
+    genre: Optional[str] = Field(default="ジャンル情報なし")
+    url: Optional[str] = Field(default="URL情報なし")
+    
+    class Config:
+        from_attributes = True
+
 class ResponseCastle(BaseModel):
     id: int
     name: str
@@ -11,12 +22,14 @@ class ResponseCastle(BaseModel):
     lat: float
     lng: float
     holiday: Optional[str] = Field(default="なし")
-    admission_time: Optional[str] = Field(default="No admission time information")
-    admission_fee: Optional[str] = Field(default="No admission fee information")
-    stamp: Optional[str] = Field(default="No stamp information")
+    admission_time: Optional[str] = Field(default="入場時間情報なし")
+    admission_fee: Optional[str] = Field(default="入場料金情報なし")
+    stamp: Optional[str] = Field(default="スタンプ情報なし")
+    restaurant: List[Restaurant]
 
     class Config:
         from_attributes = True
+
 
 class RequestCastle(BaseModel):
     castle_id: int
