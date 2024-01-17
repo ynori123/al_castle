@@ -1,9 +1,22 @@
+"use client";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import { server } from "typescript";
 
 export default function Castles() {
+  const [castleData, setCastleData] = useState<{ id: number, name: string, prefecture: string}[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
+      const data = await res.json();
+      setCastleData(data);
+    };
+    fetchData();
+  },[]);
   return (
     <>
       <Navbar />
@@ -17,13 +30,13 @@ export default function Castles() {
           {
             // 100個のカードを生成
             // TODO:なんかいい感じにデータを入れていく
-            Array.from(Array(100).keys()).map((i) => {
+            castleData.map((item, i) => {
               return (
                 <Card
                   id={i + 1}
-                  title="大阪城"
-                  discription="大阪城です"
-                  img="osaka.jpg"
+                  title={item.name}
+                  discription={item.prefecture}
+                  img={`${process.env.NEXT_PUBLIC_API_URL}/image/${i + 1}.jpg`}
                   key={i}
                 />
               );
