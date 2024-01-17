@@ -39,5 +39,4 @@ class CastleDistance(Base):
     castle_id_1 = Column(Integer, nullable=False)
     castle_id_2 = Column(Integer, nullable=False)
     distance = Column(Double(8, False, 4), nullable=False)
-    time = Column(DateTime(), nullable=True)
-
+    time = Column(Integer(), nullable=True)
