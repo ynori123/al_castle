@@ -34,6 +34,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchData = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles/${params.id}`);
       const data = await res.json();
+      console.log(data)
       setCastleData(data);
     }
     fetchData();
@@ -45,7 +46,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className="flex">
           <div className="text-left pt-32 w-3/4">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              城名
+              {castleData.name}
             </h1>
             {/* TODO:なんかいい感じにデータを入れていく
 						{params.id}には城のIDが入ってきます
@@ -54,7 +55,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <div className="pt-20">
               <table className="w-3/4 text-sm text-left  text-gray-500 dark:text-gray-400">
                 <tbody>
-                  <TableItem title="都道府県" discription="大阪府" />
+                  <TableItem title="都道府県" discription={castleData.prefecture} />
 
                   <TableItem
                     title="位置"
@@ -101,6 +102,7 @@ export default function Page({ params }: { params: { id: string } }) {
               );
             })
           }
+          {castleData.restaurant[0]?.name  === "" || castleData.restaurant[0] === undefined && <p>情報がありません。</p>}
         </div>
       </main>
       <Footer />
