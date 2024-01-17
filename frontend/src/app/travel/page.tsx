@@ -6,15 +6,34 @@ import Footer from "../components/Footer";
 import { ChangeEvent, useEffect, useState } from "react";
 import UpSvg from "../components/icons/UpSvg";
 import DownSvg from "../components/icons/DownSvg";
+import { useRouter } from "next/navigation";
 
 //出発地点
 //
+
+type dataResponse = {
+  dep: string,
+  arr: string,
+  castles: [
+    number
+  ],
+  way_distance: [
+    number
+  ],
+  way_time: [
+    string
+  ],
+  total_distance: number,
+  total_time: string
+}
+
 export default function Travel() {
   const [castleData, setCastleData] = useState<{ id: number, name: string, prefecture: string }[]>([]);
   const [start, setStart] = useState<string>("");
   const [goal, setGoal] = useState<string>("");
   const [isStop, setIsStop] = useState<boolean[]>(Array(100).fill(false));
   const [stopCastle, setStopCastle] = useState<number[]>([]);
+  const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
@@ -29,10 +48,21 @@ export default function Travel() {
     setIsStop(Array(100).fill(false));
     setStopCastle([]);
   }
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     // TODO
-    console.log(stopCastle);
-
+    if(start == ""){
+      alert("出発地を入力してください。");
+      return
+    }
+    if(goal === ""){
+      alert("到着地を入力してください。");
+      return
+    }
+    if(stopCastle.length === 0){
+      alert("巡る城が入力されていません。")
+    }
+    
+    router.push(`/travel/result?dep=${start}&arr=${goal}&castle=${[...stopCastle]}`);
   };
   const handleChangeCheckbox = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)]);
