@@ -73,7 +73,7 @@ export default function Travel() {
                           checked={isStop[i]}
                           onChange={() => setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)])}
                         />
-                        <a className="text-sm" href={"/castles/" + (i + 1)}>
+                        <a className="text-sm hover:underline" href={"/castles/" + (i + 1)}>
                           {i + 1}. {item.name}
                         </a>
                       </li>
