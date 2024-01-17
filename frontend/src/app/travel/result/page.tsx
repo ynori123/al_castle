@@ -57,11 +57,32 @@ export default function Result({params, searchParams}: Props) {
           discription="百名城の最短経路算出ツールの検索結果です．"
         />
 
-        <div className="flex flex-wrap justify-center">
-          <h2>出発地: {}</h2>
-          {
-            result.castles.map()
-          }
+        <div className="flex-col flex-wrap justify-center">
+          <div className="h-10 w-3/4 bg-gray-200 items-center flex rounded-md">
+            <h2 className="">出発地: {result.dep}</h2>
+          </div>
+          <div className="flex-col">
+            
+            {
+              result.castles.map((item, index) => {
+
+                return(
+                  <div className="relative">
+                    <div className="ml-4 w-1 h-10 bg-indigo-300"></div>
+                    <div className="h-10 w-3/4 bg-gray-200 items-center flex left-0 rounded-md">
+                      <img src="/castle.svg" alt="" width={25} className="ml-3"/>
+
+                      {item}
+                    </div>
+                  </div>
+                )
+              })
+            }
+            <div className="ml-4 w-1 h-10 bg-indigo-300"></div>
+          </div>
+          <div className="h-10 w-3/4 bg-gray-200 items-center flex rounded-md">
+            <h2>到着地: {result.arr}</h2>
+          </div>
         </div>
       </main>
       <Footer />
