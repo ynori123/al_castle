@@ -1,11 +1,24 @@
+"use client";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
 
 //出発地点
 //
 export default function Travel() {
+  const [castleData, setCastleData] = useState<{ id: number, name: string, prefecture: string }[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/castles`);
+      const data = await res.json();
+      setCastleData(data);
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <Navbar />
@@ -46,7 +59,7 @@ export default function Travel() {
               </label>
 
               <ul>
-                {Array.from(Array(100).keys()).map((i) => {
+                {castleData.map((item, i) => {
                   return (
                     <>
                       <li className="inline-block w-48">
@@ -57,7 +70,7 @@ export default function Travel() {
                           value={i + 1}
                         />
                         <a className="text-sm" href={"/castles/" + (i + 1)}>
-                          {i + 1}. 根室半島チャシ跡群
+                          {i + 1}. {item.name}
                         </a>
                       </li>
                     </>
