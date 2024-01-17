@@ -1,7 +1,11 @@
 from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy.engine import Result
-from src.model import Castle, CastleDistance
+from src.model import Castle, CastleDistance, Restaurant
+from src.schema import (
+    ResponseCastle,
+    Restaurant as ResponseRestaurant
+)
 from src.google_api import fetch_googlemap_api
 import re
 from fastapi import HTTPException
@@ -10,9 +14,34 @@ def fetch_castles(db: Session) -> List[Castle]:
     castles = db.query(Castle).all()
     return castles
 
-def fetch_specific_castles(db: Session, id: int) -> Castle:
+def fetch_specific_castles(db: Session, id: int) -> ResponseCastle:
     castle = db.query(Castle).filter_by(id=id).first()
-    return castle
+    restaurants = fetch_restaurants(castle_id=id, db=db)
+    return ResponseCastle(
+        id=castle.id,
+        name=castle.name,
+        prefecture=castle.prefecture,
+        lat=castle.lat,
+        lng=castle.lng,
+        holiday=castle.holiday,
+        admission_time=castle.admission_time,
+        admission_fee=castle.admission_fee,
+        stamp=castle.stamp,
+        restaurant=restaurants
+    )
+
+def fetch_restaurants(db: Session, castle_id: int) -> List[ResponseRestaurant]:
+    res = []
+    restaurants = db.query(Restaurant).filter_by(castle_id=castle_id).all()
+    for restaurant in restaurants:
+        res.append(ResponseRestaurant(
+            name=restaurant.name,
+            time=restaurant.time,
+            holiday=restaurant.holiday,
+            genre=restaurant.genre,
+            url=restaurant.url
+        ))
+    return res
 
 def fetch_travel(db: Session, arr: str, dep: str, castles: List[int]) -> Result:
     route = []

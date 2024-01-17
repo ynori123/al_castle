@@ -7,13 +7,12 @@ from pydantic import (
 
 class Restaurant(BaseModel):
     name: str
-    prefecture: str
     time: Optional[str] = Field(default="営業時間情報なし")
     holiday: Optional[str] = Field(default="定休日情報なし")
-    genre = Optional[str] = Field(default="ジャンル情報なし")
-    url = Optional[str] = Field(default="URL情報なし")
+    genre: Optional[str] = Field(default="ジャンル情報なし")
+    url: Optional[str] = Field(default="URL情報なし")
     
-    class config:
+    class Config:
         from_attributes = True
 
 class ResponseCastle(BaseModel):
@@ -26,7 +25,7 @@ class ResponseCastle(BaseModel):
     admission_time: Optional[str] = Field(default="入場時間情報なし")
     admission_fee: Optional[str] = Field(default="入場料金情報なし")
     stamp: Optional[str] = Field(default="スタンプ情報なし")
-    restaurant: Optional[Restaurant] = Field(default="周辺のおすすめ飲食店情報なし")
+    restaurant: List[Restaurant]
 
     class Config:
         from_attributes = True
