@@ -14,7 +14,8 @@ from src.model import (
 )
 from src.crud import (
     fetch_castles,
-    fetch_specific_castles
+    fetch_specific_castles,
+    fetch_travel
 )
 from src.database import get_db
 from sqlalchemy.orm import Session
@@ -34,6 +35,10 @@ async def get_castles(db: Session = Depends(get_db)) -> List[Castle]:
 async def get_castle(id: int, db: Session = Depends(get_db)) -> Castle:
     return fetch_specific_castles(id=id, db=db)
 
-@router.post("/travel")
-async def travel(data: RequestTravel):
-    pass
+@router.post("/travel", response_model=ResponseTravel)
+async def travel(data: RequestTravel, db: Session = Depends(get_db)):
+    arr = data.arr
+    dep = data.dep
+    castles = data.castle
+    
+    return fetch_travel(arr=arr, dep=dep, castles=castles, db=db)
