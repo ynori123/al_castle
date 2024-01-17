@@ -56,11 +56,14 @@ def fetch_travel(db: Session, arr: str, dep: str, castles: List[int]) -> Result:
     way_time = []
     castle_name = []
     way_time_str = []
+    castle_info = []
     for castle in castles:
-        specific_castle_name = db.query(Castle).filter_by(id=castle).first().name
+        specific_castle = db.query(Castle).filter_by(id=castle).first()
+        specific_castle_name = specific_castle.name
         if specific_castle_name is None:
             raise HTTPException(status_code=400, detail="Castle not found.")
         castle_name.append(specific_castle_name)
+        castle_info.append(specific_castle)
     length = len(castles)
     if length >= 2:
         for i in range(1, length):
@@ -85,7 +88,7 @@ def fetch_travel(db: Session, arr: str, dep: str, castles: List[int]) -> Result:
     return {
         "dep": dep,
         "arr": arr,
-        "castles": castles,
+        "castles": [ResponseCastleSimple(id=d.id, name=d.name, prefecture=d.prefecture) for d in castle_info],
         "way_distance": distace,
         "way_time": way_time_str,
         "total_distance": sum(distace),

@@ -1,4 +1,3 @@
-from fastapi import Depends
 from openpyxl import load_workbook
 from src.model import (
     Castle,
