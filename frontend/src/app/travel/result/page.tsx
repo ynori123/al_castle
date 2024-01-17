@@ -79,7 +79,7 @@ export default function Result({params, searchParams}: Props) {
               result.castles.map((item, index) => {
 
                 return(
-                  <div className="relative">
+                  <div className="relative" key={index}>
                     <div className="flex">
                       <div className="ml-4 w-1 h-10 bg-indigo-300 flex justify-between"></div>
                       <div className="items-center flex ml-3 w-full">
