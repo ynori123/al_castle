@@ -70,7 +70,7 @@ export default function Travel() {
               <ul>
                 {castleData.map((item, i) => {
                   return (
-                    <li className="inline-block w-48">
+                    <li className="inline-block w-48" key={i}>
                       <input
                         className="mr-2 leading-tight"
                         type="checkbox"
