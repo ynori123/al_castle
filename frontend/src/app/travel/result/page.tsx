@@ -2,7 +2,7 @@
 import Header from "@/app/components/Header";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,8 @@ type Props = {
 type QueryProps = {
   dep: string,
   arr: string,
-  castle: string
+  castle: string,
+  token: string
 }
 type CastleResponse = {
   id: number,
@@ -34,33 +35,44 @@ type DataResponse = {
 export default function Result({params, searchParams}: Props) {
   const [result, setResult] = useState<DataResponse>({dep: searchParams.dep, arr: searchParams.arr, castles: [], way_distance: [0], way_time: ["計算中..."], total_distance: 0, total_time: "計算中..."});
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-  useEffect((): void => {
-    const search = async() => {
-      const q = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          dep: searchParams.dep,
-          arr: searchParams.arr,
-          castle: searchParams.castle.split(",")
-        })
+  const eventFiredRef = useRef(false);
+  useEffect(() => {
+    const search = async () => {
+      try {
+        const q = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            dep: searchParams.dep,
+            arr: searchParams.arr,
+            castle: searchParams.castle.split(","),
+            token: searchParams.token
+          })
+        };
+  
+        console.log(q);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/travel`, q);
+  
+        if (!res.ok) {
+          console.error("Network response was not ok");
+        }
+        
+        const data: DataResponse = await res.json();
+        // console.log(data);
+        setResult(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error during fetch: ", error);
       }
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/travel`, q);
-      const data: DataResponse = await res.json();
-      // console.log(data);
-      setResult(data);
-      
-    }
-    if (searchParams.dep === undefined || searchParams.arr === undefined || searchParams.castle === undefined) {
-      router.push("/travel");
-    }else{
+    };
+    if (!eventFiredRef.current) {
+      eventFiredRef.current = true;
       search();
-      setIsLoading(false);
-    }    
-  }, [searchParams]); 
+    }
+  }, [searchParams.dep, searchParams.arr, searchParams.castle, searchParams.token]);
+  
   if (isLoading) return <p>Loading...</p>
   else if(!isLoading) return (
     <>
@@ -83,7 +95,6 @@ export default function Result({params, searchParams}: Props) {
             
             {
               result.castles.map((item, index) => {
-
                 return(
                   <div className="relative" key={index}>
                     <div className="flex">
