@@ -17,7 +17,8 @@ def fetch_castles(db: Session) -> List[Castle]:
         res.append(ResponseCastleSimple(
             id=castle.id,
             name=castle.name,
-            prefecture=castle.prefecture
+            prefecture=castle.prefecture,
+            address=castle.address
         ))
     return res
 
