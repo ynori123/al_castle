@@ -1,7 +1,11 @@
 # 城巡りアシスタントアプリケーション
 ## システム構成図
 ```mermaid
-flowchart RL
+flowchart TD
+    subgraph google[Google Map API]
+    api1[("Geocoding \n API")]
+    api2[("Distance \n Matrix API")]
+    end
     subgraph Service
     subgraph render[Render.com]
     subgraph Docker[Docker]
@@ -9,7 +13,7 @@ flowchart RL
     rdb[("メイン \n データベース \n Sqlite3")]
     end
     end
-    subgraph Vercel[Vercel]
+    subgraph Vercel[Vercel.app]
         front[("Frontend \n Next.js")]
     end
     subgraph Upstash[upstash.io]
@@ -17,12 +21,13 @@ flowchart RL
     end
     back <--"トークン生成/認証"--> nosql
     back <--"REST通信"--> front
-        back <--"データ読み書き"--> rdb
-    api[("GoogleMap \n API")]
-    back <--"ルート計算"--> api
+    back <--"データ読み書き"--> rdb
+    back <--"ルート計算"--> api2
+    back <--"住所参照"--> api1
     end
-    subgraph CronJob[CronJob]
-    job[CronJob]
+    
+    subgraph CronJob[cron-job.org]
+    job[(CronJob)]
     end
-    job <--"スリープ対策"-->back
+    job --"スリープ対策 \n 10分毎にリクエスト"-->back
 ```
