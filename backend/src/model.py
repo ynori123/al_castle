@@ -14,6 +14,7 @@ class Castle(Base):
     id = Column(Integer, primary_key=True, unique=True, autoincrement=True, nullable=False)
     name = Column(String(128), nullable=False)
     prefecture = Column(String(128), nullable=False)
+    address = Column(String(256), nullable=True)
     lat = Column(Double(7, False, 5), nullable=False)
     lng = Column(Double(8, False, 5), nullable=False)
     holiday = Column(String(256), nullable=True)
