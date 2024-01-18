@@ -59,10 +59,18 @@ export default function Travel() {
       return
     }
     if(stopCastle.length === 0){
-      alert("巡る城が入力されていません。")
+      alert("巡る城が入力されていません。");
+      return
     }
-    
-    router.push(`/travel/result?dep=${start}&arr=${goal}&castle=${[...stopCastle]}`);
+    const fetchToken = async():Promise<string> => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/token`);
+      const data = await res.json();
+      console.log(data.token);
+      return data.token;
+    };
+    const token = await fetchToken();
+    router.push(`/travel/result?dep=${start}&arr=${goal}&castle=${[...stopCastle]}&token=${token}`);
+    // await //router.push();
   };
   const handleChangeCheckbox = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setIsStop([...isStop.slice(0, i), !isStop[i], ...isStop.slice(i + 1)]);
