@@ -11,6 +11,11 @@ from src.google_api import search_castle_address
 def load_data() -> tuple[list[Castle], list[Restaurant]]:
     castle_data = []
     restaurant_data = []
+    with SessionLocal() as db:
+        logger.info("start load database")
+        if db.query(Castle).count() != 0 and db.query(Restaurant).count() != 0:
+            logger.info("data already exist.")
+            return
     try:
         wb = load_workbook("castle_data.xlsx")
         print("start load data")
