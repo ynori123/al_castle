@@ -1,13 +1,13 @@
 from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy.engine import Result
-from src.model import Castle, CastleDistance, Restaurant
+from src.model import Castle, CastleDistance, Distance, Restaurant
 from src.schema import (
     ResponseCastle,
     ResponseCastleSimple,
     Restaurant as ResponseRestaurant
 )
-from src.google_api import fetch_googlemap_api
+from src.google_api import fetch_route_api, fetch_route_api_during_castle
 from fastapi import HTTPException
 
 def fetch_castles(db: Session) -> List[Castle]:
@@ -52,47 +52,48 @@ def fetch_restaurants(db: Session, castle_id: int) -> List[ResponseRestaurant]:
 
 def fetch_travel(db: Session, arr: str, dep: str, castles: List[int]) -> Result:
     route = []
-    distace = []
-    way_time = []
-    castle_name = []
-    way_time_str = []
-    castle_info = []
+    
+    distace: List[Distance] = []
+    castle_info: List[Castle] = []
+    # 城情報の取得
     for castle in castles:
         specific_castle = db.query(Castle).filter_by(id=castle).first()
         specific_castle_name = specific_castle.name
         if specific_castle_name is None:
             raise HTTPException(status_code=400, detail="Castle not found.")
-        castle_name.append(specific_castle_name)
         castle_info.append(specific_castle)
+    first_route = fetch_route_api(origin=dep, dest=castle_info[0].address)
+    distace.append(first_route)
     length = len(castles)
     if length >= 2:
         for i in range(1, length):
             route.append(db.query(CastleDistance).filter_by(castle_id_1=castles[i-1], castle_id_2=castles[i]).first())
             if route[i-1] == None:
-                route[i-1] = fetch_googlemap_api(origin=castle_name[i-1], dest=castle_name[i])
+                r = fetch_route_api_during_castle(origin=castle_info[i-1], dest=castle_info[i])
+                route[i-1] = r.get("castle_distance")
                 db.add(route[i-1])
                 db.commit()
-            distace.append(route[i-1].distance)
-            way_time.append(route[i-1].time)
-            way_time_str.append(sec_to_str(route[i-1].time))
-    first_route = fetch_googlemap_api(origin=dep, dest=castle_name[0])
-    last_route = fetch_googlemap_api(origin=castle_name[length-1], dest=arr)
-    
-    distace.insert(0, first_route.distance)
-    distace.append(last_route.distance)
-    way_time_str.insert(0, sec_to_str(first_route.time))
-    way_time_str.append(sec_to_str(last_route.time))
-    way_time.insert(0, first_route.time)
-    way_time.append(last_route.time)
+                distace.append(r.get("distance"))
+            else:
+                distace.append(Distance(
+                    origin=castle_info[i-1].name,
+                    dest=castle_info[i].name,
+                    distance=route[i-1].distance,
+                    time=route[i-1].time
+                ))
+
+    last_route = fetch_route_api(origin=castle_info[length-1].address, dest=arr)
+
+    distace.append(last_route)
     
     return {
         "dep": dep,
         "arr": arr,
-        "castles": [ResponseCastleSimple(id=d.id, name=d.name, prefecture=d.prefecture) for d in castle_info],
-        "way_distance": distace,
-        "way_time": way_time_str,
-        "total_distance": sum(distace),
-        "total_time": sec_to_str(sum(way_time))
+        "castles": [ResponseCastleSimple(id=d.id, name=d.name, prefecture=d.prefecture, address=d.address) for d in castle_info],
+        "way_distance": [d.distance for d in distace],
+        "way_time": [sec_to_str(d.time) for d in distace],
+        "total_distance": sum([distace[i].distance for i in range(len(distace))]),
+        "total_time": sec_to_str(sum([d.time for d in distace]))
     }
 
 def sec_to_str(sec: int) -> str:
