@@ -19,6 +19,7 @@ class ResponseCastleSimple(BaseModel):
     id: int
     name: str
     prefecture: str
+    address: str
 
 class ResponseCastle(BaseModel):
     id: int
