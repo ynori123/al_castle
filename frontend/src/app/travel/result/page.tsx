@@ -125,7 +125,7 @@ export default function Result({params, searchParams}: Props) {
             <h2>到着地: <span className="font-semibold">{result.arr}</span></h2>
           </div>
           <div className="mx-auto text-xs mt-3">
-            <p>Search by <span className="hover:text-indigo-700"><Link target="_blank" href="https://www.google.com/maps/dir/@34.3166657,133.9583353,11z/data=!4m2!4m1!3e3?hl=ja">Google Map</Link></span></p>
+            <p>Search by <span className="hover:text-indigo-700"><Link target="_blank" href="https://www.google.com/maps">Google Map</Link></span></p>
           </div>
         </div>
       </main>
