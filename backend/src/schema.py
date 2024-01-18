@@ -50,7 +50,6 @@ class ResponseTravel(BaseModel):
     way_time: List[str]
     total_distance: float
     total_time: str
-    token: str
 
     class Config:
         from_attributes = True
@@ -59,6 +58,7 @@ class RequestTravel(BaseModel):
     dep: str
     arr: str
     castle: List[int]
+    token: str
 
     class Config:
         from_attributes = True
