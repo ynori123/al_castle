@@ -1,18 +1,24 @@
 # 城巡りアシスタントアプリケーション
 ## システム構成図
 ```mermaid
-flowchart LR
+flowchart RL
     subgraph Service
-    subgraph docker[docker]
-        front[("Frontend \n Next.js")]
-        back[("Backend \n Fastapi")]
-        rdb[("RDB \n Sqlite3")]
-        %% nosql[("NoSql \n MongoDB")]
-        front <--"REST"--> back
-        back <--> rdb
-        %% back <--> nosql
+    subgraph render[Render.com]
+    subgraph Docker[Docker]
+    back[("Backend \n FastAPI")]
+    rdb[("メイン \n データベース \n Sqlite3")]
     end
+    end
+    subgraph Vercel[Vercel]
+        front[("Frontend \n Next.js")]
+    end
+    subgraph Upstash[upstash.io]
+        nosql[("Redis")]
+    end
+    back <--"トークン生成/認証"--> nosql
+    back <--"REST通信"--> front
+        back <--"データ読み書き"--> rdb
     api[("GoogleMap \n API")]
-    back <--> api
+    back <--"ルート計算"--> api
     end
 ```
