@@ -83,6 +83,7 @@ export default function Result({params, searchParams}: Props) {
                     <div className="flex">
                       <div className="ml-4 w-1 h-10 bg-indigo-300 flex justify-between"></div>
                       <div className="items-center flex ml-3 w-full">
+                        <img src="/car.svg" alt="" className="w-8" />
                         <p className="px-2">所要時間: {result.way_time[index]}</p>
                         <p className="px-2">距離: {result.way_distance[index]}km</p>
                         <Link target="_blank" href={`https://www.google.com/maps/dir/?api=1&origin=${index === 0 ? result.arr : result.castles[index-1].name}&destination=${result.castles[index].name}&travelmode=driving`} className="text-right text-blue-600">詳しく見る</Link>
@@ -107,6 +108,7 @@ export default function Result({params, searchParams}: Props) {
             <div className="flex">
               <div className="ml-4 w-1 h-10 bg-indigo-300"></div>
               <div className="items-center flex ml-3 w-full">
+                <img src="/car.svg" alt="" className="w-8" />
                 <p className="px-2">所要時間: {result.way_time[result.way_time.length-1]}</p>
                 <p className="px-2">距離: {result.way_distance[result.way_distance.length-1]}km</p>
                 <Link target="_blank" href={`https://www.google.com/maps/dir/?api=1&origin=${result.castles[result.castles.length-1]?.name}&destination=${result.arr}&travelmode=driving`} className="text-right text-blue-600">詳しく見る</Link>
