@@ -74,6 +74,11 @@ export default function Result({params, searchParams}: Props) {
   }, [searchParams.dep, searchParams.arr, searchParams.castle, searchParams.token]);
   
   if (isLoading) return <p>Loading...</p>
+  else if(result.castles === undefined) return (
+    <div className="h-screen w-screen flex items-center justify-center">
+      <p>不正な検索です。もう一度<Link href="/travel" className="text-blue-700 hover:text-blue-500">検索画面</Link>からやり直してください。</p>
+    </div>
+  )
   else if(!isLoading) return (
     <>
       <Navbar />
