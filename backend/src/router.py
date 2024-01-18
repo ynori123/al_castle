@@ -1,6 +1,7 @@
 from fastapi import (
     APIRouter,
     Depends,
+    HTTPException,
 )
 from typing import List
 from src.schema import (
@@ -20,6 +21,7 @@ from src.crud import (
 )
 from src.database import get_db
 from sqlalchemy.orm import Session
+from src.auth import set_token, auth_token
 
 router = APIRouter()
 
@@ -41,5 +43,18 @@ async def travel(data: RequestTravel, db: Session = Depends(get_db)):
     arr = data.arr
     dep = data.dep
     castles = data.castle
-    
-    return fetch_travel(arr=arr, dep=dep, castles=castles, db=db)
+    token = data.token
+    if auth_token(token=token):
+        return fetch_travel(arr=arr, dep=dep, castles=castles, db=db)
+    else:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+@router.get("/token")
+def get_token():
+    token = set_token()
+    return {"token": token}
+
+@router.get("/auth")
+def authenticate(token: str):
+    result = auth_token(token=token)
+    return {"result": result}
