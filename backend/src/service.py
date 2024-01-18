@@ -6,7 +6,7 @@ from src.model import (
 from src.database import SessionLocal
 from logging import getLogger
 logger = getLogger("uvicorn.app")
-
+from src.google_api import search_castle_address
 
 def load_data() -> tuple[list[Castle], list[Restaurant]]:
     castle_data = []
@@ -30,7 +30,8 @@ def load_data() -> tuple[list[Castle], list[Restaurant]]:
                 holiday=row[5].value,
                 admission_time=row[6].value,
                 admission_fee=row[7].value,
-                stamp=row[8].value
+                stamp=row[8].value,
+                address=search_castle_address(row[1].value)
             )
             castle_data.append(castle)
         logger.info("finish load castle data")
