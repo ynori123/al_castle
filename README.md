@@ -21,4 +21,8 @@ flowchart RL
     api[("GoogleMap \n API")]
     back <--"ルート計算"--> api
     end
+    subgraph CronJob[CronJob]
+    job[CronJob]
+    end
+    job <--"スリープ対策"-->back
 ```
