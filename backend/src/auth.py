@@ -20,3 +20,17 @@ def set_token():
     hashed_token = sha256(token).hexdigest()
     r.set(hashed_token, now)
     return token
+
+def auth_token(token: str):
+    token = sha256(token.encode()).hexdigest()
+    if r.exists(token):
+        current_datetime = datetime.now()
+        parsed_datetime = datetime.strptime(r.get(token).decode(), '%Y-%m-%d %H:%M:%S')
+        if current_datetime - parsed_datetime <= timedelta(minutes=30):
+            r.delete(token)
+            return True
+        else:
+            r.delete(token)
+            return False
+    else:
+        return False
