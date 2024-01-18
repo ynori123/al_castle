@@ -4,6 +4,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   params: {}
@@ -33,7 +34,8 @@ type DataResponse = {
 export default function Result({params, searchParams}: Props) {
   const [result, setResult] = useState<DataResponse>({dep: searchParams.dep, arr: searchParams.arr, castles: [], way_distance: [0], way_time: ["計算中..."], total_distance: 0, total_time: "計算中..."});
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
+  const router = useRouter();
+  useEffect((): void => {
     const search = async() => {
       const q = {
         method: "POST",
@@ -52,9 +54,13 @@ export default function Result({params, searchParams}: Props) {
       setResult(data);
       
     }
-    search();
-    setIsLoading(false);
-  }, []); 
+    if (searchParams.dep === undefined || searchParams.arr === undefined || searchParams.castle === undefined) {
+      router.push("/travel");
+    }else{
+      search();
+      setIsLoading(false);
+    }    
+  }, [searchParams]); 
   if (isLoading) return <p>Loading...</p>
   else if(!isLoading) return (
     <>
