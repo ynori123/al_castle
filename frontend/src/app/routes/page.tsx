@@ -50,8 +50,7 @@ export default function Routes() {
           <div className="mb-5">
             <h3 className="block text-lg font-bold mb-3 w-40">結果</h3>
             <ol className="list-disc ml-4">
-              <li>必要経費：n円</li>
-              <li>総最短週数：n週間</li>
+              <li>総最短週数：7週間</li>
             </ol>
           </div>
           <div className="mb-5">
@@ -60,8 +59,18 @@ export default function Routes() {
               モデルルートの概要です。xlsxファイルで詳細をダウンロードできます。
             </p>
 
+            <div className="flex items-center justify-center">
+              <a
+                href="経路データ.xlsx"
+                download={true}
+                className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                詳細データをダウンロード(.xlsx)
+              </a>
+            </div>
+
             <div className="mb-6 mt-5">
-              <div className="mb-5">
+              <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★北海道方面
                 </h4>
@@ -119,14 +128,9 @@ export default function Routes() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
-                  <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    詳細データをダウンロード(.xlsx)
-                  </a>
-                </div>
               </div>
 
-              <div className="mb-5">
+              <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">★東北地方</h4>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
@@ -188,14 +192,9 @@ export default function Routes() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
-                  <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    詳細データをダウンロード(.xlsx)
-                  </a>
-                </div>
               </div>
 
-              <div className="mb-5">
+              <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★中部・関東地方
                 </h4>
@@ -301,14 +300,9 @@ export default function Routes() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
-                  <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    詳細データをダウンロード(.xlsx)
-                  </a>
-                </div>
               </div>
 
-              <div className="mb-5">
+              <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">★中部地方</h4>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
@@ -461,14 +455,9 @@ export default function Routes() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
-                  <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    詳細データをダウンロード(.xlsx)
-                  </a>
-                </div>
               </div>
 
-              <div className="mb-5">
+              <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★近畿・沖縄地方
                 </h4>
@@ -563,11 +552,294 @@ export default function Routes() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center">
-                  <a className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    詳細データをダウンロード(.xlsx)
-                  </a>
+              </div>
+
+              <div className="mb-24">
+                <h4 className="block text-xl font-bold mb-3 w-40">
+                  ★近畿・四国地方
+                </h4>
+                <div>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専出発</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        月曜日 8:00ごろ
+                      </p>
+                    </div>
+                  </div>
+
+                  <SmallCard
+                    id={54}
+                    title="大阪城"
+                    discription="月曜日 7:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/54.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={58}
+                    title="明石城"
+                    discription="月曜日 11:15ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/58.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={59}
+                    title="姫路城"
+                    discription="月曜日 17:10ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/59.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={60}
+                    title="赤穂城"
+                    discription="月曜日 16:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/60.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={67}
+                    title="津山城"
+                    discription="月曜日 18:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/67.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={70}
+                    title="岡山城"
+                    discription="火曜日 8:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/70.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={77}
+                    title="高松城"
+                    discription="火曜日 11:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/77.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={78}
+                    title="丸亀城"
+                    discription="水曜日 13:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/78.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={79}
+                    title="今治城"
+                    discription="火曜日 17:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/79.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={94}
+                    title="大分府内城"
+                    discription="水曜日 7:25ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/94.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={95}
+                    title="岡城"
+                    discription="水曜日 9:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/95.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={80}
+                    title="湯築城"
+                    discription="水曜日 15:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/80.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={81}
+                    title="松山城"
+                    discription="水曜日 16:50ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/81.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={82}
+                    title="大洲城"
+                    discription="木曜日 8:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/82.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={83}
+                    title="宇和島城"
+                    discription="木曜日 9:50ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/83.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={84}
+                    title="高知城"
+                    discription="木曜日 14:40ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/84.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={76}
+                    title="徳島城"
+                    discription="金曜日 8:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/76.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={55}
+                    title="千早城"
+                    discription="金曜日 13:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/55.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={62}
+                    title="和歌山城"
+                    discription="金曜日 15:40ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/62.jpg`}
+                  ></SmallCard>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専到着</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        金曜日 20:00ごろ
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <div className="mb-24">
+                <h4 className="block text-xl font-bold mb-3 w-40">
+                  ★九州・中国地方
+                </h4>
+                <div>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専出発</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        月曜日 13:30ごろ
+                      </p>
+                    </div>
+                  </div>
+
+                  <SmallCard
+                    id={96}
+                    title="飫肥城"
+                    discription="月曜日 9:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/96.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={97}
+                    title="鹿児島城"
+                    discription="月曜日 14:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/97.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={93}
+                    title="人吉城"
+                    discription="月曜日 17:10ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/93.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={92}
+                    title="熊本城"
+                    discription="火曜日 9:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/92.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={88}
+                    title="吉野ヶ里遺跡"
+                    discription="火曜日 12:50ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/88.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={89}
+                    title="佐賀城"
+                    discription="火曜日 14:20ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/89.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={91}
+                    title="島原城"
+                    discription="火曜日 17:25ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/91.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={90}
+                    title="平戸城"
+                    discription="水曜日 8:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/90.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={87}
+                    title="名護屋城"
+                    discription="火曜日 11:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/87.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={85}
+                    title="福岡城"
+                    discription="水曜日 14:35ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/85.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={86}
+                    title="大野城"
+                    discription="水曜日 16:05ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/86.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={75}
+                    title="萩城"
+                    discription="木曜日 9:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/75.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={66}
+                    title="津和野城"
+                    discription="木曜日 11:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/66.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={74}
+                    title="岩国城"
+                    discription="木曜日 14:50ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/74.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={73}
+                    title="広島城"
+                    discription="木曜日 16:50ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/73.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={72}
+                    title="郡山城"
+                    discription="木曜日 9:00ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/72.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={71}
+                    title="福山城"
+                    discription="金曜日 12:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/71.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={69}
+                    title="鬼ノ城"
+                    discription="金曜日 14:30ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/69.jpg`}
+                  ></SmallCard>
+                  <SmallCard
+                    id={68}
+                    title="備中松山城"
+                    discription="金曜日 16:20ごろ"
+                    img={`${process.env.NEXT_PUBLIC_API_URL}/image/68.jpg`}
+                  ></SmallCard>
+                  <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
+                    <div className="px-6 py-4 w-2/3">
+                      <div className="font-bold text-xl mb-2">奈良高専到着</div>
+                      <p className="text-gray-700 text-base overflow-ellipsis overflow-hidden">
+                        金曜日 23:50ごろ
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center">
+                <a
+                  href="経路データ.xlsx"
+                  download={true}
+                  className="rounded-md bg-indigo-600 my-6 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  詳細データをダウンロード(.xlsx)
+                </a>
               </div>
             </div>
           </div>
