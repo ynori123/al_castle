@@ -17,7 +17,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[setting.FRONTEND_URL],
+    allow_origins=["https://al-castle-back4app-rust.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
