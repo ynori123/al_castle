@@ -74,6 +74,9 @@ export default function Routes() {
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★北海道方面
                 </h4>
+                <div className="items-center">
+                  <img src="/root1.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -132,6 +135,9 @@ export default function Routes() {
 
               <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">★東北地方</h4>
+                <div className="items-center">
+                  <img src="/root2.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -198,6 +204,10 @@ export default function Routes() {
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★中部・関東地方
                 </h4>
+                <div className="items-center">
+                  <img src="/root3-1.png" alt="" className="w-3/5" />
+                  <img src="/root3-2.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -304,6 +314,11 @@ export default function Routes() {
 
               <div className="mb-24">
                 <h4 className="block text-xl font-bold mb-3 w-40">★中部地方</h4>
+                <div className="items-center">
+                  <img src="/root4-1.png" alt="" className="w-3/5" />
+                  <img src="/root4-2.png" alt="" className="w-3/5" />
+                  <img src="/root4-3.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -461,6 +476,11 @@ export default function Routes() {
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★近畿・沖縄地方
                 </h4>
+                <div className="items-center">
+                  <img src="/root5-1.png" alt="" className="w-3/5" />
+                  <img src="/root5-2.png" alt="" className="w-3/5" />
+                  <img src="/root5-3.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -558,6 +578,10 @@ export default function Routes() {
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★近畿・四国地方
                 </h4>
+                <div className="items-center">
+                  <img src="/root6-1.png" alt="" className="w-3/5" />
+                  <img src="/root6-2.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
@@ -697,6 +721,11 @@ export default function Routes() {
                 <h4 className="block text-xl font-bold mb-3 w-40">
                   ★九州・中国地方
                 </h4>
+                <div className="items-center">
+                  <img src="/root7-1.png" alt="" className="w-3/5" />
+                  <img src="/root7-2.png" alt="" className="w-3/5" />
+                  <img src="/root7-3.png" alt="" className="w-3/5" />
+                </div>
                 <div>
                   <div className="rounded overflow-hidden shadow-lg m-4 flex w-full h-24">
                     <div className="px-6 py-4 w-2/3">
