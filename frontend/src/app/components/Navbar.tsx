@@ -50,10 +50,10 @@ const Navbar = () => {
             経路検索ツール
           </a>
           <a
-            href="/"
+            href="/routes"
             className="block mt-4 lg:inline-block lg:mt-0 text-slate-900 hover:text-slate-500"
           >
-            その他
+            モデルルート
           </a>
         </div>
       </div>
